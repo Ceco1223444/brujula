@@ -1,5 +1,5 @@
 {
-  "_comment": "Casualty triage protocol for incident_type=casualty_triage. SORTING ONLY - this file directs how trained responders categorize casualties under START/SALT; it contains no diagnosis and no treatment steps, by design (CLAUDE.md hard rule 3). Paraphrased from the public START and SALT mass-casualty triage schemes. Loaded by matcher.py at startup; keywords drive the forgiving fallback match on needs/notes.",
+  "_comment": "Casualty triage protocol for incident_type=casualty_triage. SORTING ONLY - this file directs how trained responders categorize casualties under START/SALT; it contains no diagnosis and no treatment steps, by design (CONTRACT.md hard rule 3). Paraphrased from the public START and SALT mass-casualty triage schemes. Loaded by matcher.py at startup; keywords drive the forgiving fallback match on needs/notes.",
   "incident_type": "casualty_triage",
   "title": "Mass-casualty triage - START / SALT sorting",
   "source_standards": ["START", "SALT"],

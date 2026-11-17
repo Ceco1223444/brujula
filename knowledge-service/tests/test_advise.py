@@ -1,7 +1,7 @@
 """
 Tests for the REAL knowledge-service (matcher wired, content from data/*.json).
 
-Covers the definition of done in CLAUDE.md:
+Covers the definition of done in CONTRACT.md:
   - /health and /protocols work; all four domains load from data/.
   - /advise returns contract-shaped, domain-correct guidance for every
     covered incident_type, with named sources per domain.

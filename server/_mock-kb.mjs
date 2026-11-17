@@ -1,4 +1,4 @@
-// Temp faithful mock of Rares' knowledge-service (knowledge-service/CLAUDE.md).
+// Temp faithful mock of Rares' knowledge-service (knowledge-service/CONTRACT.md).
 // Returns his exact /advise contract shape so INTEGRATION can prove the
 // proxy-with-fallback path in server/routes/advise.js (decisions.md D1).
 // Run: node server/_mock-kb.mjs   (listens on :8100). Delete after use.

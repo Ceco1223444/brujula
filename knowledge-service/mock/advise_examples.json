@@ -1,5 +1,5 @@
 {
-  "_comment": "MOCK canned POST /advise responses for the Brujula knowledge-service. Four request->response pairs, one per incident_type (structural_collapse, casualty_triage, water_sanitation, shelter_disease). Delivered to Pepe FIRST so he can integrate before the real matcher exists. Shape follows the interface contract in CLAUDE.md. Content is illustrative operational guidance for trained responders, paraphrased from named humanitarian standards - the authoritative content will live in data/*.json. No patient diagnosis or treatment.",
+  "_comment": "MOCK canned POST /advise responses for the Brujula knowledge-service. Four request->response pairs, one per incident_type (structural_collapse, casualty_triage, water_sanitation, shelter_disease). Delivered to Pepe FIRST so he can integrate before the real matcher exists. Shape follows the interface contract in CONTRACT.md. Content is illustrative operational guidance for trained responders, paraphrased from named humanitarian standards - the authoritative content will live in data/*.json. No patient diagnosis or treatment.",
   "examples": [
     {
       "request": {

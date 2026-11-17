@@ -1,7 +1,7 @@
 {
   "name": "brujula",
   "version": "1.0.0",
-  "description": "Brujula model-serving layer — local LLM serving for an offline disaster-coordination hub",
+  "description": "Offline disaster-response coordination hub: on-device Gemma agent, LAN-synced field PWA, human-confirmed dispatch",
   "private": true,
   "type": "module",
   "engines": {

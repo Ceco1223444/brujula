@@ -10,8 +10,8 @@ code with the rest of the project.
 > `matcher.py` against the four protocol files in `data/` (INSARAG, START/SALT,
 > Sphere, WHO/PAHO — paraphrased, sources cited per step). The canned responses
 > in `mock/advise_examples.json` are no longer served; the file stays as the
-> integration fixture originally handed to Pepe. Read `CLAUDE.md` first, then
-> `PRD-Brujula.md` for background.
+> integration fixture originally handed to Pepe. The API contract is in
+> [`CONTRACT.md`](CONTRACT.md); product background in [`docs/PRD.md`](../docs/PRD.md).
 
 ## Quickstart
 
@@ -51,7 +51,7 @@ Interactive API docs while running: `http://localhost:8100/docs`.
    returned. Never an error, never a 422.
 
 Every response carries `matched_by` (`"exact"` / `"keywords"` / `"fallback"`) —
-an **additive** debugging aid on top of the contract in `CLAUDE.md`; consumers
+an **additive** debugging aid on top of the contract in `CONTRACT.md`; consumers
 can ignore it. The disclaimer and non-empty `safety_flags` are always present.
 
 ## Try it
@@ -107,8 +107,7 @@ authored content.
 
 ```
 /knowledge-service
-  CLAUDE.md                  marching orders (read first)
-  PRD-Brujula.md             team background
+  CONTRACT.md                module brief + interface contract
   README.md                  this file
   app.py                     FastAPI: /advise, /health, /protocols
   matcher.py                 situation -> guidance lookup (exact -> keywords -> other)
@@ -118,10 +117,10 @@ authored content.
   requirements.txt
 ```
 
-## Non-negotiables (from CLAUDE.md)
+## Non-negotiables (from CONTRACT.md)
 
 - **Offline only** — no runtime network calls; runs in airplane mode.
-- **Stay in your lane** — only files under `/knowledge-service`.
+- **Self-contained** — zero shared code with the rest of the repo.
 - **Operational guidance for trained responders** — never patient diagnosis or
   treatment. A disclaimer to that effect is on every `/advise` response.
 - **Paraphrase** humanitarian standards (INSARAG, Sphere, WHO/PAHO, START/SALT)

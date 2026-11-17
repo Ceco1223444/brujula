@@ -6,7 +6,7 @@ resolves an incoming /advise request to the right guidance deterministically:
 no model inference, no database, and no network - plain dict lookups and
 keyword scoring, so it answers instantly and identically in airplane mode.
 
-Matching is FORGIVING per the interface contract (CLAUDE.md):
+Matching is FORGIVING per the interface contract (CONTRACT.md):
   1. Exact match on incident_type when it is a covered type.
   2. Else keyword-score the request's `needs` tags and context["notes"] text
      against each protocol's keyword list; best score wins (ties broken by

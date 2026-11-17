@@ -1,7 +1,7 @@
 # Dependencies
 node_modules/
 
-# Private multi-agent coordination layer (Nick's local planning — never committed)
+# Local planning notes (never committed)
 context/
 
 # Runtime state & logs
@@ -38,7 +38,9 @@ desktop.ini
 coverage/
 .nyc_output/
 playwright-report/
+playwright-report-live/
 test-results/
+kb-verification-report.md
 
 # Python
 __pycache__/

@@ -1,6 +1,6 @@
 // Contract test + report generator for Rares' knowledge-service (the offline
 // protocol KB the main app proxies via /api/advise). Exercises the full
-// interface contract from knowledge-service/CLAUDE.md against a running
+// interface contract from knowledge-service/CONTRACT.md against a running
 // instance and writes a human-readable markdown report.
 //
 // Run the KB first (from /knowledge-service):
@@ -14,7 +14,7 @@
 import fs from "node:fs";
 import { parseArgs } from "node:util";
 
-// From CLAUDE.md "The interface contract" — the disclaimer is a fixed line.
+// From CONTRACT.md "The interface contract" — the disclaimer is a fixed line.
 const DISCLAIMER =
   "Operational guidance for trained responders. Not medical diagnosis or treatment advice.";
 const VALID_PRIORITIES = new Set(["critical", "high", "routine"]);
@@ -126,7 +126,7 @@ function writeReport(reportPath, base) {
   lines.push(`- **Result:** ${verdict}`);
   lines.push(`- **Checks:** ${passed}/${total} passed`);
   lines.push("");
-  lines.push("Exercises the interface contract in `knowledge-service/CLAUDE.md`: `/health`, `/protocols`, and `/advise` (exact match per domain, Spanish keyword fallback, and the `other` size-up fallback), validating response shape, ordered steps, priorities, the fixed disclaimer, and non-empty safety flags on every response.");
+  lines.push("Exercises the interface contract in `knowledge-service/CONTRACT.md`: `/health`, `/protocols`, and `/advise` (exact match per domain, Spanish keyword fallback, and the `other` size-up fallback), validating response shape, ordered steps, priorities, the fixed disclaimer, and non-empty safety flags on every response.");
   lines.push("");
 
   lines.push("## Summary");

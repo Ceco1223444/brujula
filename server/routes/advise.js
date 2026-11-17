@@ -51,7 +51,7 @@ const HARD_GENERIC = {
 };
 
 // Our board categories → knowledge-service incident_types
-// (knowledge-service/CLAUDE.md, decisions.md D1). Anything not mapped goes as
+// (knowledge-service/CONTRACT.md, decisions.md D1). Anything not mapped goes as
 // "other"; his service degrades gracefully by contract.
 const KB_INCIDENT_TYPE = {
   rescue: "structural_collapse",

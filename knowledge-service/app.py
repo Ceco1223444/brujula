@@ -7,7 +7,7 @@ which loads the four protocol files in data/*.json at startup (USAR / triage
 / WASH / disease control) and matches deterministically: exact incident_type,
 else keywords over needs/notes, else generic "other" size-up guidance.
 
-Contract lives in CLAUDE.md ("The interface contract"). Fully offline: no
+Contract lives in CONTRACT.md ("The interface contract"). Fully offline: no
 network calls at runtime. mock/advise_examples.json is no longer served -
 it remains in the repo as the integration fixture handed to Pepe.
 
@@ -32,7 +32,7 @@ class AdviseRequest(BaseModel):
     Forgiving by design: every field is optional, extra fields are allowed,
     and the declared types are loose (Any) so even a type-mangled payload -
     e.g. `needs` as a string - reaches the matcher instead of a 422
-    (see CLAUDE.md: "Matching must be forgiving"). matcher.match() is
+    (see CONTRACT.md: "Matching must be forgiving"). matcher.match() is
     defensive about shapes and never raises.
     """
 
