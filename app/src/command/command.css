@@ -288,6 +288,9 @@
     height: auto;
     min-height: 100svh;
     overflow: visible;
+    /* BorderGlow's edge light bleeds 40px past each panel; clip it so narrow
+       screens never scroll sideways (clip keeps vertical scrolling intact). */
+    overflow-x: clip;
   }
   .cmd-topbar {
     grid-template-columns: 1fr auto;

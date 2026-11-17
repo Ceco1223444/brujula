@@ -5,7 +5,7 @@ async function completeReporterOnboarding(page, name = 'Maria P.') {
   await page.getByLabel('Idioma / Language').selectOption('en');
   await page.getByText('Reporter', { exact: true }).click();
   await page.getByLabel('Your name').fill(name);
-  await page.getByRole('button', { name: 'Start' }).click();
+  await page.getByRole('button', { name: 'Enter the field' }).click();
   await expect(page.getByRole('heading', { name: 'Brújula · Field' })).toBeVisible();
 }
 
@@ -17,7 +17,7 @@ async function completeCrewOnboarding(page) {
   await page.getByText('Rescue', { exact: true }).click();
   await page.getByLabel('People').fill('5');
   await page.getByLabel('Where you are').fill('Caraballeda');
-  await page.getByRole('button', { name: 'Start' }).click();
+  await page.getByRole('button', { name: 'Enter the field' }).click();
   await expect(page.getByText('Crew Alpha · specialized crew')).toBeVisible();
 }
 
@@ -26,21 +26,20 @@ test.beforeEach(async ({ page }) => {
   await page.evaluate(() => localStorage.clear());
 });
 
-test('onboarding starts in Spanish, switches language instantly, and persists it', async ({ page }) => {
+test('onboarding starts in English, switches language instantly, and persists it', async ({ page }) => {
   await page.reload();
 
-  await expect(page.getByRole('heading', { name: 'Bienvenido a Brújula' })).toBeVisible();
-  await expect(page.getByLabel('Idioma / Language')).toHaveValue('es');
-  await expect(page.getByText('Reportero')).toBeVisible();
-
-  await page.getByLabel('Idioma / Language').selectOption('en');
-  await expect(page.getByRole('heading', { name: 'Welcome to Brújula' })).toBeVisible();
-  await expect(page.getByRole('heading', { name: 'Who are you in the field?' })).toBeVisible();
-  await expect(page.getByText('Specialized crew')).toBeVisible();
-
-  await page.reload();
   await expect(page.getByRole('heading', { name: 'Welcome to Brújula' })).toBeVisible();
   await expect(page.getByLabel('Idioma / Language')).toHaveValue('en');
+  await expect(page.getByText('Reporter', { exact: true })).toBeVisible();
+
+  await page.getByLabel('Idioma / Language').selectOption('es');
+  await expect(page.getByRole('heading', { name: 'Bienvenido a Brújula' })).toBeVisible();
+  await expect(page.getByText('Reportero', { exact: true })).toBeVisible();
+
+  await page.reload();
+  await expect(page.getByRole('heading', { name: 'Bienvenido a Brújula' })).toBeVisible();
+  await expect(page.getByLabel('Idioma / Language')).toHaveValue('es');
 });
 
 test('reporter can submit a report and see it progress through the outbox', async ({ page }) => {
@@ -61,9 +60,10 @@ test('reporter can submit a report and see it progress through the outbox', asyn
 
 test('settings menu changes field display language after onboarding', async ({ page }) => {
   await page.reload();
+  await page.getByLabel('Idioma / Language').selectOption('es');
   await page.getByText('Reportero', { exact: true }).click();
   await page.getByLabel('Tu nombre').fill('María P.');
-  await page.getByRole('button', { name: 'Comenzar' }).click();
+  await page.getByRole('button', { name: 'Entrar al terreno' }).click();
   await expect(page.getByText('¿Qué está pasando?')).toBeVisible();
 
   await page.getByRole('button', { name: 'Ajustes' }).click();
@@ -89,17 +89,19 @@ test('crew profile exposes mission status and assignment inbox', async ({ page }
   await expect(page.locator('.empty', { hasText: /No assignments/i })).toBeVisible();
 });
 
-test('field context chat answers from resources and KB', async ({ page }) => {
+test('field assistant tab sends a question and shows the answer', async ({ page }) => {
   await completeReporterOnboarding(page, 'Ana Field');
 
-  const chat = page.getByRole('region', { name: 'Context Chat' });
-  await expect(chat).toBeVisible();
+  await page.locator('.field-tabs').getByRole('button', { name: 'Ask' }).click();
+  await expect(page.getByText(/No questions yet/)).toBeVisible();
 
-  await chat.getByLabel('Ask anything from known resources or KB').fill('What should rescue crews remember?');
-  await chat.getByRole('button', { name: 'Ask' }).click();
+  const composer = page.locator('.ask-composer');
+  await composer.getByPlaceholder('Type your question…').fill('What should rescue crews remember?');
+  await composer.getByRole('button', { name: 'Ask' }).click();
 
-  await expect(chat.getByText(/silence/i)).toBeVisible({ timeout: 10_000 });
-  await expect(chat.getByText(/Knowledge Base/i)).toBeVisible();
+  // Mock mode answers with a fixed demo reply; the live hub grounds it in the board + KB.
+  await expect(page.locator('.ask-line--q')).toContainText('What should rescue crews remember?');
+  await expect(page.locator('.ask-line--a .ask-text')).not.toBeEmpty({ timeout: 10_000 });
 });
 
 test('field layout keeps touch targets usable on a narrow phone', async ({ page }) => {

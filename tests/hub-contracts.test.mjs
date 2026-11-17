@@ -28,7 +28,9 @@ before(async () => {
 });
 
 beforeEach(() => {
-  store.reset();
+  // Start from an empty board: these contracts register their own crews and
+  // reports, and the demo seed's resources would otherwise win the match.
+  store.wipe();
 });
 
 after(() => {

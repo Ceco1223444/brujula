@@ -6,9 +6,11 @@ test('landing routes expose every station', async ({ page }) => {
   // getByRole('main') scopes past the intro-splash wordmark, which is also an
   // h1 labelled BRÚJULA while the welcome animation plays.
   await expect(page.getByRole('main').getByRole('heading', { name: /BRÚJULA/i })).toBeVisible();
-  await expect(page.getByRole('link', { name: /Grafo de Mando/i })).toHaveAttribute('href', '/graph');
-  await expect(page.getByRole('link', { name: /Puesto de Mando/i })).toHaveAttribute('href', '/command');
-  await expect(page.getByRole('link', { name: /Cliente de Campo/i })).toHaveAttribute('href', '/field');
+  // Match on "<route> <title>": the Command Post card's description also
+  // mentions "Command Graph", so the title alone is ambiguous.
+  await expect(page.getByRole('link', { name: /\/graph Command Graph/ })).toHaveAttribute('href', '/graph');
+  await expect(page.getByRole('link', { name: /\/command Command Post/ })).toHaveAttribute('href', '/command');
+  await expect(page.getByRole('link', { name: /\/field Field Client/ })).toHaveAttribute('href', '/field');
 });
 
 test('remote devices are blocked from the command post', async ({ page }) => {
